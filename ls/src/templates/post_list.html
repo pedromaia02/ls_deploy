@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul class="pagination pagination-lg">
+<li class="active"><a href='{% url "posts:list" %}'>Bloco das Varas</a></li>
+<li><a href='{% url "posts:create" %}'>Bloco das Cortes</a></li>
+<li><a href="#">Bloco Geral</a></li>
+</ul>
+
+<hr>
+<h3>Filtrar mês:</h3>
+<form method="GET" action="">
+
+<select name="q" >
+  <option value="1">Janeiro</option> 
+  <option value="2">Fevereiro</option>
+  <option value="3">Março</option>
+  <option value="4">Abril</option>
+  <option value="5">Maio</option> 
+  <option value="6">Junho</option>
+  <option value="7">Julho</option>
+  <option value="8">Agosto</option>
+  <option value="9">Setembro</option> 
+  <option value="10">Outubro</option>
+  <option value="11">Novembro</option>
+  <option value="12">Dezembro</option>
+</select>
+  <input type="submit" value="Buscar">
+</form>
+
+<hr>
+
+
+<h2>{{ title }} is working ! :)</h2>
+
+<table class="table table-bordered" cellspacing="0" width="100%">
+
+<th class="info">Data</th>
+<th class="info">Contrato</th>
+<th class="info">Legenda</th>
+<th class="info">Detalhe</th>
+<th class="info">Tipo</th>
+
+{% for obj in object_list %}
+
+<tr>
+<td>{{ obj.data }}</td>
+<td>{{ obj.contrato }}</td>
+<td><a href='{% url "posts:detail" id=obj.id %}'>{{ obj.legenda }}</a><br/></td>
+<td>{{ obj.detalhe }}</td>
+<td>{{ obj.tipo }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ]);
+
+        // Set chart options
+        var options = {'title':'How Much Pizza I Ate Last Night',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+
+{% endblock content %}
+

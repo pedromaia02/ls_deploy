@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<hr>
+<h1>Controle Financeiro - LS</h1>
+<hr>
+
+<ul class="pagination pagination-sm">
+<li><a href='{% url "posts:list" %}'>Início</a></li>
+<li><a href='{% url "posts:create" %}'>Adicionar dados</a></li>
+<li><a href='{% url "posts:dre" %}'>DRE</a></li>
+<li class="active"><a href="#">Gráficos e Estatíticas</a></li>
+</ul>
+
+<hr>
+<h4>Filtrar mês:</h4>
+<br>
+<form method="GET" action="">
+  <label for="mes">Data: </label>
+    <select name="mes" id="mes">
+      <!-- <option selected disabled>Choose here</option> -->
+        <option value="todos">Todos</option>
+        <option value="1">Janeiro</option>
+        <option value="2">Fevereiro</option>
+        <option value="3">Março</option>
+        <option value="4">Abril</option>
+        <option value="5">Maio</option>
+        <option value="6">Junho</option>
+        <option value="7">Julho</option>
+        <option value="8">Agosto</option>
+        <option value="9">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
+    </select>
+    <input type="submit" value="Buscar">
+</form>
+<hr>
+
+<h3>{{title}}</h3>
+
+<br>
+
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Legenda</th>
+      <th>Despesa</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for dados in legendas_valores.items %}
+    <tr>
+      <td>{{ dados.0 }}</td>
+      <td>{{ dados.1.saida }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <!-- <tfoot>
+ <tr>
+   <td bgcolor="#8f8f70">TOTAIS:</td>
+   <td bgcolor="#8f8f70">{{ total_saida }}</td>
+ </tr>
+</tfoot> -->
+</table>
+
+<br>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var saida = {{graph_saida|safe}};
+    var data = google.visualization.arrayToDataTable(saida);
+
+    var options = {'title': 'Despesas',
+                   'width':800,
+                   'height':400};
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+
+<div class="row">
+  <div class="col-md-8" id="chart_div"></div>
+</div>
+
+<hr>
+<a class="btn btn-primary btn-sm" href='{% url "posts:list" %}' role="button">Retornar</a>
+<hr>
+
+{% endblock content %}
+
+
+<!-- <h1> Detalhes: </h1>
+
+<h4> Local: {{ instance.contrato }} </h4>
+<h4> Descrição: {{ instance.detalhe }} </h4>
+<h4> Data: {{ instance.data }} </h4>
+<h4> Tipo: {{ instance.legenda }} </h4>
+<h4> {{ instance.tipo }} </h4>
+<h4> Valor: {{ instance.valor }} </h4>
+
+{% if instance.anexo %}
+<a href="{{ instance.anexo.url }}" target="_blank">Baixar Anexo</a>
+{% else %}
+<h4>Item sem anexo</h4>
+{% endif %} -->
