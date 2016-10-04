@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<hr>
+<h1>Controle Financeiro - LS</h1>
+<hr>
+
+<ul class="pagination pagination-sm">
+<li><a href='{% url "posts:list" %}'>Início</a></li>
+<li><a href='{% url "posts:create" %}'>Adicionar dados</a></li>
+<li class="active"><a href='{% url "posts:dre" %}'>DRE</a></li>
+<li><a href="#">Gráficos e Estatíticas</a></li>
+</ul>
+
+<hr>
+<h4>Filtrar mês:</h4>
+<br>
+<form method="GET" action="">
+  <label for="mes">Data: </label>
+    <select name="mes" id="mes">
+      <!-- <option selected disabled>Choose here</option> -->
+        <option value="todos">Todos</option>
+        <option value="1">Janeiro</option>
+        <option value="2">Fevereiro</option>
+        <option value="3">Março</option>
+        <option value="4">Abril</option>
+        <option value="5">Maio</option>
+        <option value="6">Junho</option>
+        <option value="7">Julho</option>
+        <option value="8">Agosto</option>
+        <option value="9">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
+    </select>
+    <input type="submit" value="Buscar">
+</form>
+<hr>
+
+  <h3> {{title}} </h3><br>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Contrato</th>
+        <th>Receita</th>
+        <th>Despesa</th>
+        <th>Lucro</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dados in contratos_valores.items %}
+      <tr>
+        <td>
+          <a href='{% url "posts:detail" local=dados.0 %}'>
+            {{ dados.0 }}
+        </td>
+        <td>{{ dados.1.entrada }}</td>
+        <td>{{ dados.1.saida }}</td>
+        <td>{{ dados.1.lucro }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+   <tr>
+     <td bgcolor="#8f8f70">TOTAIS:</td>
+     <td bgcolor="#8f8f70">{{ total_entrada }}</td>
+     <td bgcolor="#8f8f70">{{ total_saida }}</td>
+     <td bgcolor="#8f8f70">{{ total_lucro }}</td>
+   </tr>
+ </tfoot>
+
+  </table>
+
+
+  <script type="text/javascript">
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+      // Create the data table.
+      //var data = new google.visualization.DataTable();
+      var saida = {{graph_saida|safe}};
+      var entrada = {{graph_entrada|safe}};
+      var lucro = {{graph_lucro|safe}};
+      var data = google.visualization.arrayToDataTable(entrada);
+      var data2 = google.visualization.arrayToDataTable(saida);
+      var data3 = google.visualization.arrayToDataTable(lucro);
+      // data.addColumn('string', 'Topping');
+      // data.addColumn('number', 'Slices');
+      // data.addRows([
+      //   ['pedro', 3],
+      //   ['abc', 1],
+      //   ['teste', 1],
+      // ]);
+      // Set chart options
+      var options = {'title': 'Receitas',
+                     'width':500,
+                     'height':300};
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+
+      var options = {'title': 'Despesas',
+                     'width':500,
+                     'height':300};
+
+      var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+      chart2.draw(data2, options);
+
+      var options = {
+         title: "Lucros",
+         width: 1000,
+         height: 400,
+         bar: {groupWidth: "20%"},
+       };
+      var chart3 = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
+      chart3.draw(data3, options);
+    }
+  </script>
+
+  <div class="row">
+    <div class="col-md-6" id="chart_div"></div>
+    <div class="col-md-6" id="chart_div2"></div>
+  </div>
+<br>
+  <div class="row">
+    <div class="col-md-8" id="chart_div3"></div>
+  </div>
+
+
+
+  <!-- <div id="chart_div"></div>
+  <div id="chart_div2"></div> -->
+
+{% endblock content %}
