@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from .models import Posts
+from .models import Posts,Contratos
 
 import datetime
 
@@ -30,16 +30,21 @@ class PostForm(forms.ModelForm):
 		('UNIFORMES, FERAMENTAS, EPI', 'UNIFORMES, FERAMENTAS, EPI'),
 		)
 
-	CONTRATOS = (
-		('TRT', 'TRT'),
-		('FORTALEZA', 'FORTALEZA'),
-		('SOBRAL', 'SOBRAL'),
-		('JUAZEIRO', 'JUAZEIRO'),
-		('INSS-NATAL', 'INSS-NATAL'),
-		('PETROLINA', 'PETROLINA'),
-		('BAHIA', 'BAHIA'),
-		('IMPERATRIZ', 'IMPERATRIZ'),
-		)
+	# CONTRATOS = [
+	# 	('TRT', 'TRT'),
+	# 	('FORTALEZA', 'FORTALEZA'),
+	# 	('SOBRAL', 'SOBRAL'),
+	# 	('JUAZEIRO', 'JUAZEIRO'),
+	# 	('INSS-NATAL', 'INSS-NATAL'),
+	# 	('PETROLINA', 'PETROLINA'),
+	# 	('BAHIA', 'BAHIA'),
+	# 	('IMPERATRIZ', 'IMPERATRIZ'),
+	# 	]
+
+	CONTRATOS = []
+	nomes = [nome.encode("utf8") for nome in Contratos.objects.all().values_list('nome', flat=True)]
+	for nome in nomes:
+		CONTRATOS.append((nome,nome))
 
 	CHOICES = (('SAIDA', 'Saída',), ('ENTRADA', 'Entrada',))
 
