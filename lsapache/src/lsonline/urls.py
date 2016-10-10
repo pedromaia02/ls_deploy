@@ -19,11 +19,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from posts import views
+from addinfo import views
 from accounts.views import (login_view, register_view, logout_view)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^posts/', include("posts.urls", namespace='posts')),
+    url(r'^addinfo/', include("addinfo.urls", namespace='addinfo')),
     url(r'^login/', login_view, name='login'),
     url(r'^logout/', logout_view, name='logout'),
 ]

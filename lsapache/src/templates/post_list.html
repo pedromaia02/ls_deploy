@@ -40,13 +40,16 @@
 <label for="contrato">Contrato: </label>
 <select name="contrato" id="contrato">
   <option value="">Todos</option>
-  <option value="TRT">TRT</option>
+  {% for nome in nome_contratos %}
+  <option value={{nome}}>{{nome}}</option>
+  {% endfor %}
+  <!-- <option value="TRT">TRT</option>
   <option value="FORTALEZA">FORTALEZA</option>
   <option value="SOBRAL">SOBRAL</option>
   <option value="JUAZEIRO">JUAZEIRO</option>
   <option value="INSS-NATAL">INSS-NATAL</option>
   <option value="PETROLINA">PETROLINA</option>
-  <option value="IMPERATRIZ">IMPERATRIZ</option>
+  <option value="IMPERATRIZ">IMPERATRIZ</option> -->
 </select>
 
 <label for="servico">Serviço: </label>

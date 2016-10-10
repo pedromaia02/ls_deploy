@@ -28,6 +28,7 @@ class Posts(models.Model):
 
 class Contratos(models.Model):
     nome = models.CharField(max_length=45)
+    obs = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         managed = True

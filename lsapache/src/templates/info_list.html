@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<hr>
+<h1>Controle Financeiro - LS</h1>
+<hr>
+<ul class="pagination pagination-sm">
+  <li><a href='{% url "posts:list" %}'>Início</a></li>
+  <li><a href='{% url "posts:create" %}'>Adicionar dados</a></li>
+  <li><a href='{% url "posts:dre" %}'>DRE</a></li>
+  <li><a href="#">Gráficos e Estatíticas</a></li>
+</ul>
+<hr>
+
+<h3>Lista de Contratos Registrados<h3>
+  <hr>
+  <a class="btn btn-success btn-sm" href='{% url "addinfo:create" %}' role="button">Adicionar Contrato</a>
+  <hr>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+{% for obj in object_list %}
+      <tr>
+        <td>{{obj.nome}}</td>
+        <td><a href='{% url "addinfo:delete" id=obj.id %}'>Excluir</a></td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

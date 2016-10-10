@@ -70,7 +70,7 @@ def post_detail(request, local=None):
 	context = {
 		"title":title,
 		"graph_saida": json.dumps(graph_saida),
-		"legendas_valores": legendas_valores, 
+		"legendas_valores": legendas_valores,
 	}
 
 	return render(request,"post_detail.html", context)
@@ -95,10 +95,11 @@ def post_list(request):
 	context = {
 			"object_list": queryset,
 			"table": table,
-			"mes": request.GET.get('contrato',''),
-			"contrato": request.GET.get('contrato',''),
-			"servico": request.GET.get('servico',''),
-			"tipo": request.GET.get('tipo','')
+			"nome_contratos": [nome.encode("utf8") for nome in Contratos.objects.all().values_list('nome', flat=True)],
+			# "mes": request.GET.get('contrato',''),
+			# "contrato": request.GET.get('contrato',''),
+			# "servico": request.GET.get('servico',''),
+			# "tipo": request.GET.get('tipo',''),
 	 	}
 	return render(request,"post_list.html", context)
 
