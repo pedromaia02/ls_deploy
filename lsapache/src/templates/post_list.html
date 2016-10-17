@@ -55,14 +55,17 @@
 <label for="servico">Serviço: </label>
 <select name="servico" id="servico">
   <option value="">Todos</option>
-  <option value="MATERIAIS DE OBRA">MATERIAIS DE OBRA</option>
+  {% for nome in nome_legendas %}
+  <option value={{nome}}>{{nome}}</option>
+  {% endfor %}
+  <!-- <option value="MATERIAIS DE OBRA">MATERIAIS DE OBRA</option>
   <option value="COMBUSTIVEL">COMBUSTIVEL</option>
   <option value="DESPESAS VIAGEM">DESPESAS VIAGEM</option>
   <option value="MANUTENCAO VEICULOS">MANUTENCAO VEICULOS</option>
   <option value="MATERIAIS CONSUMO">MATERIAIS CONSUMO</option>
   <option value="DESPESAS OPERACIONAIS">DESPESAS OPERACIONAIS</option>
   <option value="FOLHA DE PAGAMENTO">FOLHA DE PAGAMENTO</option>
-  <option value="UNIFORMES, FERAMENTAS, EPI">UNIFORMES, FERAMENTAS, EPI</option>
+  <option value="UNIFORMES, FERAMENTAS, EPI">UNIFORMES, FERAMENTAS, EPI</option> -->
 </select>
 
 <label for="tipo">Tipo: </label>

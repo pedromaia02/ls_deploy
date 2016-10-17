@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from .models import Posts,Contratos
+from .models import Posts,Contratos,Legendas
 
 import datetime
 
@@ -18,17 +18,17 @@ class PostForm(forms.ModelForm):
 			"tipo",
 			"anexo",
 		]
-
-	LEGENDA = (
-		('MATERIAIS DE OBRA', 'MATERIAIS DE OBRA'),
-		('COMBUSTIVEL', 'COMBUSTIVEL'),
-		('DESPESAS VIAGEM', 'DESPESAS VIAGEM'),
-		('MANUTENCAO VEICULOS', 'MANUTENCAO VEICULO'),
-		('MATERIAIS CONSUMO', 'MATERIAIS CONSUMO'),
-		('DESPESAS OPERACIONAIS', 'DESPESAS OPERACIONAIS'),
-		('FOLHA DE PAGAMENTO', 'FOLHA DE PAGAMENTO'),
-		('UNIFORMES, FERAMENTAS, EPI', 'UNIFORMES, FERAMENTAS, EPI'),
-		)
+	#
+	# LEGENDA = (
+	# 	('MATERIAIS DE OBRA', 'MATERIAIS DE OBRA'),
+	# 	('COMBUSTIVEL', 'COMBUSTIVEL'),
+	# 	('DESPESAS VIAGEM', 'DESPESAS VIAGEM'),
+	# 	('MANUTENCAO VEICULOS', 'MANUTENCAO VEICULO'),
+	# 	('MATERIAIS CONSUMO', 'MATERIAIS CONSUMO'),
+	# 	('DESPESAS OPERACIONAIS', 'DESPESAS OPERACIONAIS'),
+	# 	('FOLHA DE PAGAMENTO', 'FOLHA DE PAGAMENTO'),
+	# 	('UNIFORMES, FERAMENTAS, EPI', 'UNIFORMES, FERAMENTAS, EPI'),
+	# 	)
 
 	# CONTRATOS = [
 	# 	('TRT', 'TRT'),
@@ -45,6 +45,11 @@ class PostForm(forms.ModelForm):
 	nomes = [nome.encode("utf8") for nome in Contratos.objects.all().values_list('nome', flat=True)]
 	for nome in nomes:
 		CONTRATOS.append((nome,nome))
+
+	LEGENDA = []
+	nomes = [nome.encode("utf8") for nome in Legendas.objects.all().values_list('nome', flat=True)]
+	for nome in nomes:
+		LEGENDA.append((nome,nome))
 
 	CHOICES = (('SAIDA', 'Saída',), ('ENTRADA', 'Entrada',))
 

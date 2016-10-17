@@ -101,6 +101,7 @@ def post_list(request):
 			"object_list": queryset,
 			"table": table,
 			"nome_contratos": [nome.encode("utf8") for nome in Contratos.objects.all().values_list('nome', flat=True)],
+			"nome_legendas": [nome.encode("utf8") for nome in Legendas.objects.all().values_list('nome', flat=True)],
 			# "mes": request.GET.get('contrato',''),
 			# "contrato": request.GET.get('contrato',''),
 			# "servico": request.GET.get('servico',''),
