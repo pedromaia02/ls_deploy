@@ -17,6 +17,7 @@ class PostsTable(tables.Table):
         self.base_columns['local'].verbose_name = "Local"
         self.base_columns['numero_chamado'].verbose_name = "Nº Chamado"
         self.base_columns['status'].verbose_name = "Status"
+        self.base_columns['tecnico'].verbose_name = "Técnico Responsável"
         # self.base_columns['profissional'].verbose_name = "Profissional Responsável"
         self.base_columns['actions'].verbose_name = "Ações"
 
@@ -24,4 +25,4 @@ class PostsTable(tables.Table):
         model = FortalPosts
         # add class="paleblue" to <table> tag
         attrs = {'class': 'paleblue'}
-        fields = ('data', 'numero_chamado', 'local','status','anexo','actions')
+        fields = ('data', 'numero_chamado', 'local','status','tecnico','anexo','actions')

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django import forms
 
-from .models import FortalPosts,FortalProfissionals
+from .models import FortalPosts,FortalProfissionals,FortalCidades
 
 import datetime
 
@@ -40,6 +40,13 @@ class PostForm(forms.ModelForm):
 	profissional = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=PROFESSIONAL_NOMES,)
 	detalhe = forms.CharField(widget=forms.Textarea)
 	anexo = forms.FileField(label='Anexar algum arquivo',help_text='max. 42 megabytes',required = False)
+
+	LOCAIS = []
+	nomes = [nome.encode("utf8") for nome in FortalCidades.objects.all().values_list('nome', flat=True)]
+	for nome in nomes:
+		LOCAIS.append((nome,nome))
+
+	local = forms.CharField(widget=forms.Select(choices=LOCAIS))
 
 	def __init__(self, *args, **kwargs):
 		super(PostForm, self).__init__(*args, **kwargs)

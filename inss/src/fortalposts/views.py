@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from django_tables2 import RequestConfig
 
-from .models import FortalPosts,FortalProfissionals
+from .models import FortalPosts,FortalProfissionals,FortalCidades
 from .forms import PostForm
 from .tables import PostsTable
 
@@ -64,7 +64,13 @@ def post_list(request):
 		queryset = queryset.filter(local__icontains=request.GET.get('local',''))
 		queryset = queryset.filter(status__icontains=request.GET.get('status',''))
 		queryset = queryset.filter(detalhe__icontains=request.GET.get('detalhe',''))
-
+		print queryset.values_list()
+		if request.GET.get('tipo','')=='0' or request.GET.get('tipo','')== "":
+			pass
+		elif request.GET.get('tipo','')=='2':
+			queryset = queryset.filter(numero_chamado__exact=None)
+		else:
+			queryset = queryset.filter(numero_chamado__icontains='')
 
 	table = PostsTable(queryset)
 	#NO PAGINATION: RequestConfig(request, paginate=false).configure(table)
@@ -72,6 +78,7 @@ def post_list(request):
 	context = {
 			"object_list": queryset,
 			"table": table,
+			"cidades":FortalCidades.objects.all().order_by('nome').values_list('nome', flat=True)
 	 	}
 	return render(request,"post_list.html", context)
 

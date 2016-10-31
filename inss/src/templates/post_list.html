@@ -39,13 +39,9 @@
 <label for="local">Local: </label>
 <select name="local" id="local">
   <option value="">Todos</option>
-  <option value="FORTALEZA">FORTALEZA</option>
-  <option value="RUSSAS">RUSSAS</option>
-  <option value="ARACATI">ARACATI</option>
-  <option value="SOBRAL">SOBRAL</option>
-  <option value="JUAZEIRO DO NORTE">JUAZEIRO DO NORTE</option>
-  <option value="CAUCAIA">CAUCAIA</option>
-  <option value="EUSEBIO">EUSEBIO</option>
+  {% for cidade in cidades %}
+  <option value={{cidade}}>{{cidade}}</option>
+  {% endfor %}
 </select>
 
 <label for="status">Status: </label>
@@ -54,6 +50,13 @@
   <option value="FINALIZADO">FINALIZADO</option>
   <option value="FALTA DE MATERIAL">FALTA DE MATERIAL</option>
   <option value="EM ANDAMENTO">EM ANDAMENTO</option>
+</select>
+
+<label for="tipo">Tipo: </label>
+<select name="tipo" id="tipo">
+  <option value="0">Todos</option>
+  <option value="1">CHAMADO</option>
+  <option value="2">SERVIÇO EVENTUAL</option>
 </select>
 
   <input type="submit" value="Buscar">

@@ -33,3 +33,10 @@ class FortalProfissionals(models.Model):
     class Meta:
         # managed = False
         db_table = 'inss_fortal_profissionals'
+
+class FortalCidades(models.Model):
+    nome = models.CharField(max_length=45)
+
+    class Meta:
+        # managed = False
+        db_table = 'inss_fortal_cidades'
