@@ -14,6 +14,7 @@ from .models import FortalPosts,FortalProfissionals,FortalCidades
 from .forms import PostForm
 from .tables import PostsTable
 
+@login_required(login_url='/login/')
 def post_create(request):
 
 	form = PostForm(request.POST or None, request.FILES or None)
@@ -30,6 +31,7 @@ def post_create(request):
 	}
 	return render(request,"post_form.html", context)
 
+@login_required(login_url='/login/')
 def post_detail(request, id=None):
 	instance = get_object_or_404( FortalPosts,id=id)
 
@@ -82,7 +84,7 @@ def post_list(request):
 	 	}
 	return render(request,"post_list.html", context)
 
-
+@login_required(login_url='/login/')
 def post_update(request, id=None):
 	instance = get_object_or_404(FortalPosts,id=id)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
@@ -97,6 +99,7 @@ def post_update(request, id=None):
 	}
 	return render(request,"post_form.html", context)
 #
+@login_required(login_url='/login/')
 def post_delete(request, id=None):
 	instance = get_object_or_404(FortalPosts, id=id)
 	instance.delete()
