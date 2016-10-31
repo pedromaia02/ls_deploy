@@ -50,7 +50,7 @@ def post_detail(request, id=None):
 	}
 	return render(request,"post_detail.html", context)
 
-
+@login_required(login_url='/login/')
 def post_list(request):
 
 	queryset = FortalPosts.objects.all().order_by('-data')
