@@ -55,7 +55,8 @@ class PostForm(forms.ModelForm):
 
 	contrato = forms.CharField(widget=forms.Select(choices=CONTRATOS))
 	legenda = forms.CharField(widget=forms.Select(choices=LEGENDA))
-	data = forms.DateField(widget=forms.SelectDateWidget(),initial=datetime.date.today())
+	#data = forms.DateField(widget=forms.SelectDateWidget(),initial=datetime.date.today())
+	data = forms.DateField(widget=forms.SelectDateWidget(years=range(2012, 2020)),initial=datetime.date.today())
 	tipo = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
 	detalhe = forms.CharField(widget=forms.Textarea)
 	#anexo = forms.FileField(label='Select a file',help_text='max. 42 megabytes')
