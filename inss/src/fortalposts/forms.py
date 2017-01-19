@@ -35,7 +35,8 @@ class PostForm(forms.ModelForm):
 		('FALTA DE MATERIAL', 'FALTA DE MATERIAL'),
 		]
 	status = forms.CharField(widget=forms.Select(choices=STATUS))
-	data = forms.DateField(widget=forms.SelectDateWidget(),initial=datetime.date.today())
+	#data = forms.DateField(widget=forms.SelectDateWidget(),initial=datetime.date.today())
+	data = forms.DateField(widget=forms.SelectDateWidget(years=range(2012, 2020)),initial=datetime.date.today())
 
 	profissional = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=PROFESSIONAL_NOMES,)
 	detalhe = forms.CharField(widget=forms.Textarea)
