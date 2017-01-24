@@ -19,11 +19,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from fortalposts import views
+from natalposts import views
 from accounts.views import (login_view, register_view, logout_view)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^inssfortaleza/', include("fortalposts.urls", namespace='fortalposts')),
+    url(r'^inssnatal/', include("natalposts.urls", namespace='natalposts')),
     url(r'^login/', login_view, name='login'),
     url(r'^logout/', logout_view, name='logout'),
 ]

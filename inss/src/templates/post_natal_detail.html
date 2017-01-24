@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<hr>
+<h1>INSS Natal - LS Projetos</h1>
+<hr>
+
+<ul class="pagination pagination-lm">
+<li ><a href='{% url "natalposts:list" %}'>Início</a></li>
+<li><a href='{% url "natalposts:create" %}'>Adicionar dados</a></li>
+<li class="active"><a href="#">Detalhes</a></li>
+</ul>
+<hr>
+
+<h2 style="color:rgb(255,0,0)"><b>Detalhe dos dados</b></h2>
+<br>
+<hr>
+<a class="btn btn-info btn-lg" href='{% url "natalposts:update" instance.id %}' role="button">Modificar</a>
+<br>
+<br>
+<table class="table">
+  <tr>
+    <th>Número do Chamado:</th>
+    <td>{{instance.numero_chamado}}</td>
+  </tr>
+  <tr>
+    <th>Data do Chamado:</th>
+    <td>{{instance.data}}</td>
+  </tr>
+  <tr>
+    <th>Técnico Responsável:</th>
+    <td>{{instance.tecnico}}</td>
+  </tr>
+  <tr>
+    <th>Status:</th>
+    <td>{{instance.status}}</td>
+  </tr>
+  <tr>
+    <th>Detalhes:</th>
+    <td>{{instance.detalhe}}</td>
+  </tr>
+  <tr>
+    <th>Material Utilizado:</th>
+    <td>{{instance.material}}</td>
+  </tr>
+</table>
+<hr>
+{% if instance.anexo %}
+<h4><i><a href="{{ instance.anexo.url }}" target="_blank">Baixar arquivo em anexo</a></i></h4>
+{% else %}
+<h4><i>Nenhum arquivo em anexo registrado neste chamado</i></h4>
+{% endif %}
+
+
+<br>
+<div class="container">
+  <h3><b>Profissionais Responsáveis</b></h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Função:</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in profissional_cargos %}
+      <tr>
+        <td>{{ x.0 }}</td>
+        <td>{{ x.1 }}</td>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+
+
+{% endblock content %}
+
+
+<!-- <h1> Detalhes: </h1>
+
+<h4> Local: {{ instance.contrato }} </h4>
+<h4> Descrição: {{ instance.detalhe }} </h4>
+<h4> Data: {{ instance.data }} </h4>
+<h4> Tipo: {{ instance.legenda }} </h4>
+<h4> {{ instance.tipo }} </h4>
+<h4> Valor: {{ instance.valor }} </h4>
+
+{% if instance.anexo %}
+<a href="{{ instance.anexo.url }}" target="_blank">Baixar Anexo</a>
+{% else %}
+<h4>Item sem anexo</h4>
+{% endif %} -->
