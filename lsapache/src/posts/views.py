@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.db.models import Sum
 import json
 from django.contrib.auth.decorators import login_required
+from decimal import Decimal
 # from django.views.generic.edit import DeleteView
 # from django.urls import reverse_lazy
 
@@ -156,13 +157,13 @@ def dre(request):
 		contratos_valores[str(nome[0])] = {}
 		if valorEntrada['valor__sum'] != None:
 			#contrato_valor_entrada.update({ nome[0]:valorEntrada['valor__sum']})
-			contratos_valores[str(nome[0])]['entrada'] = valorEntrada['valor__sum']
+			contratos_valores[str(nome[0])]['entrada'] = round(valorEntrada['valor__sum'],2)
 		else:
 			#contrato_valor_entrada.update({nome[0]:0})
 			contratos_valores[str(nome[0])]['entrada'] = 0
 		if valorSaida['valor__sum'] != None:
 			#contrato_valor_saida.update({str(nome[0]):valorSaida['valor__sum']})
-			contratos_valores[str(nome[0])]['saida'] = valorSaida['valor__sum']
+			contratos_valores[str(nome[0])]['saida'] = round(valorSaida['valor__sum'],2)
 		else:
 			#contrato_valor_saida.update({str(nome[0]):0})
 			contratos_valores[str(nome[0])]['saida'] = 0
@@ -197,9 +198,9 @@ def dre(request):
 			#"object_list": queryset,
 			"title": title,
 			"contratos_valores": contratos_valores,
-			"total_saida": total_saida,
-			"total_entrada": total_entrada,
-			"total_lucro": total_lucro,
+			"total_saida": round(total_saida,2),
+			"total_entrada": round(total_entrada,2),
+			"total_lucro": round(total_lucro,2),
 			"graph_saida": json.dumps(graph_saida),
 			"graph_entrada": json.dumps(graph_entrada),
 			"graph_lucro": json.dumps(graph_lucro),
