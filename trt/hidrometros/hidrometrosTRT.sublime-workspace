@@ -1,0 +1,294 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"lo",
+				"logout"
+			],
+			[
+				"auth",
+				"authenticate"
+			],
+			[
+				"login",
+				"login_view"
+			],
+			[
+				"media",
+				"media_diurno"
+			],
+			[
+				"consum",
+				"consumo_stats"
+			],
+			[
+				"std",
+				"std_diurno"
+			],
+			[
+				"H",
+				"Hidrometros"
+			],
+			[
+				"med",
+				"medicao_final"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"th",
+				"thead	Tag"
+			],
+			[
+				"c",
+				"cellspacing	Attr"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"Date",
+				"DateInput"
+			],
+			[
+				"url",
+				"urlpatterns"
+			],
+			[
+				"Http",
+				"HttpResponseRedirect"
+			],
+			[
+				"prin",
+				"print_r"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/C/projects/myenv_blog/src/posts/views.py",
+		"/C/projects/myenv_blog/src/templates/base.html",
+		"/C/projects/myenv_blog/src/templates/post_list.html",
+		"/C/Users/pedro/Dropbox/UFRN-Atividades/Mestrado/2016.2/Otimizacao/matlab/hs71.apm",
+		"/C/projects/myenv_blog/src/myblog/settings.py",
+		"/C/projects/myenv_blog/src/posts/forms.py",
+		"/C/Users/pedro/Desktop/hidrometros.sql",
+		"/C/projects/ls/trt/src/hidrotrt/settings.py",
+		"/C/projects/ls/trt/.gitignore",
+		"/C/projects/ls/trt/src/templates/home.html",
+		"/C/projects/ls/trt/src/templates/hidrometros_list.html",
+		"/C/projects/ls/trt/src/templates/form.html",
+		"/C/projects/ls/trt/src/templates/base.html",
+		"/C/projects/ls/trt/static_cdn/admin/img/icon-changelink.svg",
+		"/C/projects/myenv_blog/src/myblog/urls.py",
+		"/C/projects/ls/trt/src/hidrotrt/urls.py",
+		"/C/projects/ls/trt/src/accounts/views.py",
+		"/C/projects/ls/trt/src/accounts/forms.py",
+		"/C/projects/ls/trt/src/posts/views.py",
+		"/C/Users/pedro/Documents/python/rascunho.py",
+		"/C/projects/ls/trt/src/templates/hidrometros_list_corte_h1.html",
+		"/C/projects/ls/trt/src/templates/hidrometros_form.html",
+		"/C/projects/ls/trt/src/posts/forms.py",
+		"/C/projects/ls/trt/src/templates/hidrometros_detail.html",
+		"/C/projects/ls/trt/src/posts/urls.py",
+		"/C/projects/ls/trt/src/posts/models.py",
+		"/C/projects/ls/trt/src/templates/hidrometros_form_corte_h1.html",
+		"/C/projects/ls/trt/src/posts/apps.py",
+		"/C/projects/myenv_blog/src/templates/post_detail.html",
+		"/C/projects/myenv_blog/src/posts/urls.py",
+		"/C/projects/myenv_blog/src/templates/post_form.html",
+		"/C/projects/myenv_blog/src/posts/models.py",
+		"/C/projects/myenv_blog/src/static/css/base.css",
+		"/C/projects/myenv_blog/src/posts/admin.py",
+		"/C/projects/myenv_blog/src/templates/messages_display.html",
+		"/C/projects/myenv_blog/src/templates/index.html",
+		"/C/projects/myenv_blog/src/myblog/wsgi.py",
+		"/C/wamp/www/index.php",
+		"/C/wamp/www/debug.localhost/index.php",
+		"/C/wamp/www/localhost/app/Config/database.php",
+		"/C/wamp/www/localhost/index.php",
+		"/C/wamp/www/localhost/app/index.php",
+		"/C/wamp/www/localhost/app/Config/core.php",
+		"/C/wamp/wwwdebug/index.php",
+		"/C/wamp/bin/apache/apache2.4.9/conf/httpd.conf",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/pedro/Downloads/verizon/index.html",
+		"/C/Users/pedro/Desktop/teste.bin",
+		"/C/wamp/apps/phpmyadmin4.1.14/config.inc.php",
+		"/C/Users/pedro/Downloads/verizon/savekey.php",
+		"/C/wamp/apps/phpmyadmin4.1.14/setup/config.php",
+		"/C/wamp/apps/phpmyadmin4.1.14/setup/index.php"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"hidro",
+			"post",
+			"title",
+			"Posts",
+			"Listen 80"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			" hidrometros",
+			" Hidrometros"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "hidrometrosTRT.sublime-project",
+	"replace":
+	{
+		"height": 80.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 625.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\projects\\ls\\ls\\ls.sublime-project"
+			]
+		],
+		"width": 475.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 355.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
