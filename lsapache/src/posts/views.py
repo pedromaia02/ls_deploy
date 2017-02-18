@@ -48,8 +48,10 @@ def post_detail(request, local=None):
 	query = request.GET.get('mes','')
 	legenda_nomes = Legendas.objects.all().values_list('nome') #Obter nome das legendas na tabela legendas
 	title = ('Estruturado por Legenda - Contrato: %s - ' % local)+"Todos os meses"
+	mes = "todos"
 	if query:
 		try:
+			mes = query
 			queryset = queryset.filter(data__month=query)
 			title = ('Estruturado por Legenda - Contrato: %s - 0' % local)+str(query)+"/2016"
 		except:
@@ -63,19 +65,37 @@ def post_detail(request, local=None):
 
 		if valorSaida['valor__sum'] != None:
 			#contrato_valor_saida.update({str(nome[0]):valorSaida['valor__sum']})
-			legendas_valores[str(nome[0])]['saida'] = valorSaida['valor__sum']
+			legendas_valores[str(nome[0])]['saida'] = round(valorSaida['valor__sum'],2)
 		else:
 			#contrato_valor_saida.update({str(nome[0]):0})
 			legendas_valores[str(nome[0])]['saida'] = 0
+
+
+	valorEntrada = queryset.filter(tipo__icontains='ENTRADA').aggregate(Sum('valor'))
+	if valorEntrada['valor__sum'] != None:
+		valorEntrada = round(valorEntrada['valor__sum'],2)
+	else:
+		valorEntrada = 0
+	valorSaida = queryset.filter(tipo__icontains='SAIDA').aggregate(Sum('valor'))
+	if valorSaida['valor__sum'] != None:
+		valorSaida = round(valorSaida['valor__sum'],2)
+	else:
+		valorSaida = 0
 
 	graph_saida = [['Legenda','Saida']]
 	for x in legendas_valores.items():
 		graph_saida.append([x[0],x[1]['saida']])
 
+	print mes
 	context = {
 		"title":title,
 		"graph_saida": json.dumps(graph_saida),
 		"legendas_valores": legendas_valores,
+		"valorTotalEntrada": valorEntrada,
+		"valorTotalSaida": valorSaida,
+		"valorTotalLucro": (valorEntrada - valorSaida),
+		"local": local,
+		"data": mes,
 	}
 
 	return render(request,"post_detail.html", context)

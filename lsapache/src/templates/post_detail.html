@@ -52,17 +52,27 @@
   <tbody>
     {% for dados in legendas_valores.items %}
     <tr>
-      <td>{{ dados.0 }}</td>
+      <td><a href="/posts/?mes={{ data }}&contrato={{ local }}&servico={{ dados.0 }}&tipo=SAIDA">{{ dados.0 }}</td>
       <td>{{ dados.1.saida }}</td>
     </tr>
     {% endfor %}
   </tbody>
-  <!-- <tfoot>
+  <tfoot>
  <tr>
-   <td bgcolor="#8f8f70">TOTAIS:</td>
-   <td bgcolor="#8f8f70">{{ total_saida }}</td>
+   <td bgcolor="#E92525"><b>TOTAIS DE SAÍDAS:</b></td>
+   <td bgcolor="#E92525"><b>{{ valorTotalSaida }}</b></td>
  </tr>
-</tfoot> -->
+ <tr><td></td></tr>
+ <tr>
+   <td bgcolor="#50EE24"><b>TOTAIS DE ENTRADAS:</b></td>
+   <td bgcolor="#50EE24"><b>{{ valorTotalEntrada }}</b></td>
+ </tr>
+ <tr><td></td></tr>
+<tr>
+  <td bgcolor="#FFFF0E"><b>LUCRO:</b></td>
+  <td bgcolor="#FFFF0E"><b>{{ valorTotalLucro }}</b></td>
+</tr>
+</tfoot>
 </table>
 
 <br>
