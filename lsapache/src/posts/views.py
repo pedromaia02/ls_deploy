@@ -14,6 +14,8 @@ from django_tables2 import RequestConfig
 from .models import Posts,Contratos,Legendas
 from .forms import PostForm
 from .tables import PostsTable
+import locale
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 #@login_required(login_url='/login/')
 def post_create(request):
@@ -92,14 +94,14 @@ def post_detail(request, local=None):
 	for x in legendas_valores.items():
 		graph_saida.append([x[0],x[1]['saida']])
 
-	#print mes
+	#print legendas_valores
 	context = {
 		"title":title,
 		"graph_saida": json.dumps(graph_saida),
 		"legendas_valores": legendas_valores,
-		"valorTotalEntrada": valorEntrada,
-		"valorTotalSaida": valorSaida,
-		"valorTotalLucro": (valorEntrada - valorSaida),
+		"valorTotalEntrada": locale.currency(valorEntrada, grouping=True, symbol=True),
+		"valorTotalSaida": locale.currency(valorSaida, grouping=True, symbol=True),
+		"valorTotalLucro": locale.currency((valorEntrada - valorSaida), grouping=True, symbol=True),
 		"local": local,
 		"data": mes,
 	}
@@ -239,9 +241,9 @@ def dre(request):
 			#"object_list": queryset,
 			"title": title,
 			"contratos_valores": contratos_valores,
-			"total_saida": round(total_saida,2),
-			"total_entrada": round(total_entrada,2),
-			"total_lucro": round(total_lucro,2),
+			"total_saida": locale.currency(total_saida, grouping=True, symbol=True),
+			"total_entrada": locale.currency(total_entrada, grouping=True, symbol=True),
+			"total_lucro": locale.currency(total_lucro, grouping=True, symbol=True),
 			"graph_saida": json.dumps(graph_saida),
 			"graph_entrada": json.dumps(graph_entrada),
 			"graph_lucro": json.dumps(graph_lucro),
