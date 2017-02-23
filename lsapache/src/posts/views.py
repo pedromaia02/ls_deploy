@@ -46,14 +46,20 @@ def post_detail(request, local=None):
 
 	queryset = Posts.objects.all().filter(contrato__icontains=local)
 	query = request.GET.get('mes','')
+	query_ano = request.GET.get('ano','')
 	legenda_nomes = Legendas.objects.all().values_list('nome') #Obter nome das legendas na tabela legendas
 	title = ('Estruturado por Legenda - Contrato: %s - ' % local)+"Todos os meses"
 	mes = "todos"
-	if query:
+	if query != None:
 		try:
-			mes = query
-			queryset = queryset.filter(data__month=query)
-			title = ('Estruturado por Legenda - Contrato: %s - 0' % local)+str(query)+"/2016"
+			if query_ano == "todos":
+				queryset = queryset.filter(data__month=query)
+			elif query == "todos":
+				queryset = queryset.filter(data__year=query_ano)
+			else:
+				queryset = queryset.filter(data__year=query_ano,data__month=query)
+			title = "DRE - "+str(query)+"/"+str(query_ano)
+			#print title
 		except:
 			pass
 
@@ -86,7 +92,7 @@ def post_detail(request, local=None):
 	for x in legendas_valores.items():
 		graph_saida.append([x[0],x[1]['saida']])
 
-	print mes
+	#print mes
 	context = {
 		"title":title,
 		"graph_saida": json.dumps(graph_saida),
@@ -104,11 +110,19 @@ def post_detail(request, local=None):
 def post_list(request):
 
 	queryset = Posts.objects.all().order_by('data')
-	query = request.GET
+	query = request.GET.get('mes','')
+	query_ano = request.GET.get('ano','')
 
-	if query:
+	if query != None:
 		try:
-			queryset = queryset.filter(data__month=request.GET.get('mes',''))
+			if query_ano == "todos":
+				queryset = queryset.filter(data__month=query)
+			elif query == "todos":
+				queryset = queryset.filter(data__year=query_ano)
+			else:
+				queryset = queryset.filter(data__year=query_ano,data__month=query)
+			title = "DRE - "+str(query)+"/"+str(query_ano)
+			#print title
 		except:
 			pass
 		queryset = queryset.filter(contrato__icontains=request.GET.get('contrato',''))
@@ -157,14 +171,21 @@ def dre(request):
 
 	queryset = Posts.objects.all()
 	query = request.GET.get('mes','')
+	query_ano = request.GET.get('ano','')
 	contrato_nomes = Contratos.objects.all().values_list('nome') #Obter nome dos contratos na tabela contratos
 	contrato_valor_entrada = {} #dict com o nome do contrato + o valor de entrada resultante no periodo
 	contrato_valor_saida = {} #dict com o nome do contrato + o valor de saida resultante no periodo
 	title = "DRE - TOTAL"
-	if query:
+	if query != None:
 		try:
-			queryset = queryset.filter(data__month=query)
-			title = "DRE - 0"+str(query)+"/2016"
+			if query_ano == "todos":
+				queryset = queryset.filter(data__month=query)
+			elif query == "todos":
+				queryset = queryset.filter(data__year=query_ano)
+			else:
+				queryset = queryset.filter(data__year=query_ano,data__month=query)
+			title = "DRE - "+str(query)+"/"+str(query_ano)
+			print title
 		except:
 			pass
 

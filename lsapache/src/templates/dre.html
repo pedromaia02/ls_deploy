@@ -17,8 +17,8 @@
 <h4>Filtrar mês:</h4>
 <br>
 <form method="GET" action="">
-  <label for="mes">Data: </label>
-    <select name="mes" id="mes">
+  <label for="mes">Mês: </label>
+    <select name="mes" id="nes">
       <!-- <option selected disabled>Choose here</option> -->
         <option value="todos">Todos</option>
         <option value="1">Janeiro</option>
@@ -34,11 +34,25 @@
         <option value="11">Novembro</option>
         <option value="12">Dezembro</option>
     </select>
-    <input type="submit" value="Buscar">
+
+
+<label for="ano">Ano: </label>
+<select name="ano" id="ano">
+  <!-- <option selected disabled>Choose here</option> -->
+  <option value="todos">Todos</option>
+  <option value="2015">2015</option>
+  <option value="2016">2016</option>
+  <option value="2017">2017</option>
+  <option value="2018">2018</option>
+  <option value="2019">2019</option>
+</select>
+
+<input type="submit" value="Buscar">
 </form>
+
 <hr>
 
-  <h3> {{title}} </h3><br>
+  <h2><b> {{title}} </b></h2><br>
   <table class="table table-condensed">
     <thead>
       <tr>
