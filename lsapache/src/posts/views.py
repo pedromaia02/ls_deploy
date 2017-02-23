@@ -131,7 +131,7 @@ def post_list(request):
 		queryset = queryset.filter(detalhe__icontains=request.GET.get('detalhe',''))
 
 	table = PostsTable(queryset)
-	RequestConfig(request, paginate=False).configure(table)
+	RequestConfig(request, paginate={'per_page': 25}).configure(table)
 	context = {
 			"object_list": queryset,
 			"table": table,
