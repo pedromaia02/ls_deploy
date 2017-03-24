@@ -158,7 +158,7 @@ def post_list(request):
 			"table": table,
 			"nome_contratos": [nome.encode("utf8") for nome in Contratos.objects.all().values_list('nome', flat=True)],
 			"nome_legendas": [nome.encode("utf8") for nome in Legendas.objects.all().values_list('nome', flat=True)],
-			"valor_total": valor_total,
+			"valor_total": round(valor_total,2),
 			#"title": title
 	 	}
 	return render(request,"post_list.html", context)
