@@ -66,7 +66,7 @@
       {% for dados in contratos_valores.items %}
       <tr>
         <td>
-          <a href='{% url "posts:detail" local=dados.0 %}'>
+          <a href='{% url "posts:detail" local=dados.0 %}?mes={{ mes }}&ano={{ ano }}'>
             {{ dados.0 }}
         </td>
         <td>{{ dados.1.entrada }}</td>

@@ -92,10 +92,18 @@
 <form method="GET" action="">
   <input type="text" name="detalhe" placeholder="Pesquisar pela descrição" value="{{request.GET.detalhe}}">
 <input type="submit" value="Pesquisar">
-
 <hr>
-
 <br>
+
+
+<h2>{{title}}</h2>
+<table class="table table-sm">
+  <tr>
+    <th>TOTAL:</th>
+    <td>{{ valor_total }}</td>
+  </tr>
+</table>
+
 {% render_table table %}
 
 <!-- <br><br><br>

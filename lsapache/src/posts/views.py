@@ -51,7 +51,7 @@ def post_detail(request, local=None):
 	query_ano = request.GET.get('ano','')
 	legenda_nomes = Legendas.objects.all().values_list('nome') #Obter nome das legendas na tabela legendas
 	title = ('Estruturado por Legenda - Contrato: %s - ' % local)+"Todos os meses"
-	mes = "todos"
+
 	if query != None:
 		try:
 			if query_ano == "todos":
@@ -103,7 +103,8 @@ def post_detail(request, local=None):
 		"valorTotalSaida": locale.currency(valorSaida, grouping=True, symbol=True),
 		"valorTotalLucro": locale.currency((valorEntrada - valorSaida), grouping=True, symbol=True),
 		"local": local,
-		"data": mes,
+		"mes": query,
+		"ano": query_ano,
 	}
 
 	return render(request,"post_detail.html", context)
@@ -114,7 +115,8 @@ def post_list(request):
 	queryset = Posts.objects.all().order_by('data')
 	query = request.GET.get('mes','')
 	query_ano = request.GET.get('ano','')
-
+	mes = "todos"
+	ano = "todos"
 	if query != None:
 		try:
 			if query_ano == "todos":
@@ -123,14 +125,31 @@ def post_list(request):
 				queryset = queryset.filter(data__year=query_ano)
 			else:
 				queryset = queryset.filter(data__year=query_ano,data__month=query)
-			title = "DRE - "+str(query)+"/"+str(query_ano)
+			data = str(query)+"/"+str(query_ano)
 			#print title
+			mes = str(query)
+			ano = str(query_ano)
 		except:
 			pass
 		queryset = queryset.filter(contrato__icontains=request.GET.get('contrato',''))
 		queryset = queryset.filter(legenda__icontains=request.GET.get('servico',''))
 		queryset = queryset.filter(tipo__icontains=request.GET.get('tipo',''))
 		queryset = queryset.filter(detalhe__icontains=request.GET.get('detalhe',''))
+
+	valor_total = queryset.aggregate(Sum('valor'))
+	valor_total = valor_total['valor__sum']
+
+	contrato = request.GET.get('contrato','')
+	if contrato == None:
+		contrato = "todos"
+	servico = request.GET.get('servico','')
+	if servico == None:
+		servico = "todos"
+	tipo = request.GET.get('tipo','')
+	if tipo == None:
+		tipo = "todos"
+
+	# title = "Mes: " + mes + " Ano: " + ano + " " + contrato + " - " + servico + " - " + tipo
 
 	table = PostsTable(queryset)
 	RequestConfig(request, paginate={'per_page': 25}).configure(table)
@@ -139,10 +158,8 @@ def post_list(request):
 			"table": table,
 			"nome_contratos": [nome.encode("utf8") for nome in Contratos.objects.all().values_list('nome', flat=True)],
 			"nome_legendas": [nome.encode("utf8") for nome in Legendas.objects.all().values_list('nome', flat=True)],
-			# "mes": request.GET.get('contrato',''),
-			# "contrato": request.GET.get('contrato',''),
-			# "servico": request.GET.get('servico',''),
-			# "tipo": request.GET.get('tipo',''),
+			"valor_total": valor_total,
+			#"title": title
 	 	}
 	return render(request,"post_list.html", context)
 
@@ -247,5 +264,7 @@ def dre(request):
 			"graph_saida": json.dumps(graph_saida),
 			"graph_entrada": json.dumps(graph_entrada),
 			"graph_lucro": json.dumps(graph_lucro),
+			"mes": query,
+			"ano": query_ano,
 	 	}
 	return render(request,"dre.html", context)
