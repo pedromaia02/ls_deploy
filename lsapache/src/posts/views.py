@@ -17,7 +17,7 @@ from .tables import PostsTable
 import locale
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_create(request):
 
 	form = PostForm(request.POST or None, request.FILES or None)
@@ -43,7 +43,7 @@ def post_create(request):
 	}
 	return render(request,"post_form.html", context)
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_detail(request, local=None):
 
 	queryset = Posts.objects.all().filter(contrato__icontains=local)
@@ -109,7 +109,7 @@ def post_detail(request, local=None):
 
 	return render(request,"post_detail.html", context)
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_list(request):
 
 	queryset = Posts.objects.all().order_by('data')
@@ -163,7 +163,7 @@ def post_list(request):
 	 	}
 	return render(request,"post_list.html", context)
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_update(request, id=None):
 	instance = get_object_or_404(Posts,id=id)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
@@ -178,15 +178,18 @@ def post_update(request, id=None):
 	}
 	return render(request,"post_form.html", context)
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_delete(request, id=None):
 	instance = get_object_or_404(Posts, id=id)
 	instance.delete()
 	messages.success(request,"Item Deleted :(")
 	return redirect("posts:list")
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def dre(request):
+
+	if request.user.username == "aprendiz":
+		return redirect('/login/?next=%s' % request.path)
 
 	queryset = Posts.objects.all()
 	query = request.GET.get('mes','')
