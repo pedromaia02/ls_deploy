@@ -60,7 +60,7 @@ def post_detail(request, local=None):
 				queryset = queryset.filter(data__year=query_ano)
 			else:
 				queryset = queryset.filter(data__year=query_ano,data__month=query)
-			title = "DRE - "+str(query)+"/"+str(query_ano)
+			title = ('Estruturado por Legenda - Contrato: %s - ' % local)+str(query)+"/"+str(query_ano)
 			#print title
 		except:
 			pass
@@ -139,6 +139,8 @@ def post_list(request):
 
 	valor_total = queryset.aggregate(Sum('valor'))
 	valor_total = valor_total['valor__sum']
+	if valor_total == None:
+		valor_total = 0
 
 	contrato = request.GET.get('contrato','')
 	if contrato == None:
@@ -179,7 +181,7 @@ def post_update(request, id=None):
 	}
 	return render(request,"post_form.html", context)
 
-# @login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_delete(request, id=None):
 	instance = get_object_or_404(Posts, id=id)
 	instance.delete()
