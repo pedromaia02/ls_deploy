@@ -68,7 +68,8 @@ def post_detail(request, local=None):
 	legendas_valores = {}
 	for nome in legenda_nomes:
 
-		valorSaida = queryset.filter(legenda__icontains=nome[0],tipo__icontains='SAIDA').aggregate(Sum('valor'))
+		#valorSaida = queryset.filter(legenda__icontains=nome[0],tipo__icontains='SAIDA').aggregate(Sum('valor'))
+		valorSaida = queryset.filter(legenda__icontains=nome[0]).aggregate(Sum('valor'))
 		legendas_valores[str(nome[0])] = {}
 
 		if valorSaida['valor__sum'] != None:
