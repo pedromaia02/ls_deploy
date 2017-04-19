@@ -64,7 +64,8 @@
   <tbody>
     {% for dados in legendas_valores.items %}
     <tr>
-      <td><a href="/posts/?mes={{ mes }}&ano={{ ano }}&contrato={{ local }}&servico={{ dados.0 }}&tipo=SAIDA">{{ dados.0 }}</td>
+      <!-- <td><a href="/posts/?mes={{ mes }}&ano={{ ano }}&contrato={{ local }}&servico={{ dados.0 }}&tipo=SAIDA">{{ dados.0 }}</td> -->
+      <td><a href="/posts/?mes={{ mes }}&ano={{ ano }}&contrato={{ local }}&servico={{ dados.0 }}">{{ dados.0 }}</td>
       <td>{{ dados.1.saida }}</td>
     </tr>
     {% endfor %}
