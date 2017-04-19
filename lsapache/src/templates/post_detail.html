@@ -10,11 +10,11 @@
 <li><a href='{% url "posts:list" %}'>Início</a></li>
 <li><a href='{% url "posts:create" %}'>Adicionar dados</a></li>
 <li><a href='{% url "posts:dre" %}'>DRE</a></li>
-<li class="active"><a href="#">Gráficos e Estatíticas</a></li>
+<li class="active"><a href="#">Detalhes</a></li>
 </ul>
 
 <hr>
-<h4>Filtrar mês:</h4>
+<h4>Filtrar período:</h4>
 <br>
 <form method="GET" action="">
   <label for="mes">Mês: </label>
@@ -48,6 +48,32 @@
 
 <input type="submit" value="Buscar">
 </form>
+
+<hr>
+
+<form method="GET" action="">
+<label for="trimestre">Trimestre: </label>
+  <select name="trimestre" id="trimestre">
+    <!-- <option selected disabled>Choose here</option> -->
+    <option value="0">-</option>
+    <option value="1">1T</option>
+    <option value="2">2T</option>
+    <option value="3">3T</option>
+    <option value="4">4T</option>
+  </select>
+<label for="ano">Ano: </label>
+  <select name="ano" id="ano">
+    <!-- <option selected disabled>Choose here</option> -->
+    <option value="todos">Todos</option>
+    <option value="2015">2015</option>
+    <option value="2016">2016</option>
+    <option value="2017">2017</option>
+    <option value="2018">2018</option>
+    <option value="2019">2019</option>
+  </select>
+<input type="submit" value="Buscar">
+</form>
+
 <hr>
 
   <h2><b> {{title}} </b></h2><br>

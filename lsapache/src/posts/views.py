@@ -6,6 +6,7 @@ from django.db.models import Sum
 import json
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
+from django.db.models import Q
 # from django.views.generic.edit import DeleteView
 # from django.urls import reverse_lazy
 
@@ -17,7 +18,7 @@ from .tables import PostsTable
 import locale
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_create(request):
 
 	form = PostForm(request.POST or None, request.FILES or None)
@@ -43,12 +44,13 @@ def post_create(request):
 	}
 	return render(request,"post_form.html", context)
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_detail(request, local=None):
 
 	queryset = Posts.objects.all().filter(contrato__icontains=local)
 	query = request.GET.get('mes','')
 	query_ano = request.GET.get('ano','')
+	query_trim = request.GET.get('trimestre','')
 	legenda_nomes = Legendas.objects.all().values_list('nome') #Obter nome das legendas na tabela legendas
 	title = ('Estruturado por Legenda - Contrato: %s - ' % local)+"Todos os meses"
 
@@ -62,6 +64,25 @@ def post_detail(request, local=None):
 				queryset = queryset.filter(data__year=query_ano,data__month=query)
 			title = ('Estruturado por Legenda - Contrato: %s - ' % local)+str(query)+"/"+str(query_ano)
 			#print title
+		except:
+			pass
+
+	if query_trim != None:
+		try:
+			if query_ano != "todos":
+				queryset = queryset.filter(data__year=query_ano)
+			if query_trim == "1":
+				queryset = queryset.filter(Q(data__month=1) | Q(data__month=2) | Q(data__month=3))
+				title = ('Estruturado por Legenda - Contrato: %s - ' % local)+str(query_trim)+"T/"+str(query_ano)
+			elif query_trim == "2":
+				queryset = queryset.filter(Q(data__month=4) | Q(data__month=5) | Q(data__month=6))
+				title = ('Estruturado por Legenda - Contrato: %s - ' % local)+str(query_trim)+"T/"+str(query_ano)
+			elif query_trim == "3":
+				queryset = queryset.filter(Q(data__month=7) | Q(data__month=8) | Q(data__month=9))
+				title = ('Estruturado por Legenda - Contrato: %s - ' % local)+str(query_trim)+"T/"+str(query_ano)
+			elif query_trim == "4":
+				queryset = queryset.filter(Q(data__month=10) | Q(data__month=11) | Q(data__month=12))
+				title = ('Estruturado por Legenda - Contrato: %s - ' % local)+str(query_trim)+"T/"+str(query_ano)
 		except:
 			pass
 
@@ -110,7 +131,7 @@ def post_detail(request, local=None):
 
 	return render(request,"post_detail.html", context)
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_list(request):
 
 	queryset = Posts.objects.all().order_by('data')
@@ -166,7 +187,7 @@ def post_list(request):
 	 	}
 	return render(request,"post_list.html", context)
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_update(request, id=None):
 	instance = get_object_or_404(Posts,id=id)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
@@ -181,14 +202,14 @@ def post_update(request, id=None):
 	}
 	return render(request,"post_form.html", context)
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_delete(request, id=None):
 	instance = get_object_or_404(Posts, id=id)
 	instance.delete()
 	messages.success(request,"Item Deleted :(")
 	return redirect("posts:list")
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def dre(request):
 
 	if request.user.username == "aprendiz":
