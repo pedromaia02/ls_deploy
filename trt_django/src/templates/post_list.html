@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load render_table from django_tables2 %}
+
+<hr>
+<h1>TRT - LS Projetos - Controle de Material</h1>
+<hr>
+
+<ul class="pagination pagination-lm">
+<li class="active"><a href='{% url "trtmaterial:list" %}'>Início</a></li>
+<li><a href='{% url "trtmaterial:create" %}'>Adicionar dados</a></li>
+<li ><a href="#">Detalhes</a></li>
+</ul>
+
+<hr>
+<h4>Filtragem dados:</h4>
+<br>
+<form method="GET" action="">
+
+<label for="data">Data: </label>
+<select name="mes" id="data">
+  <!-- <option selected disabled>Choose here</option> -->
+  <option value="todos">Todos</option>
+  <option value="1">Janeiro</option>
+  <option value="2">Fevereiro</option>
+  <option value="3">Março</option>
+  <option value="4">Abril</option>
+  <option value="5">Maio</option>
+  <option value="6">Junho</option>
+  <option value="7">Julho</option>
+  <option value="8">Agosto</option>
+  <option value="9">Setembro</option>
+  <option value="10">Outubro</option>
+  <option value="11">Novembro</option>
+  <option value="12">Dezembro</option>
+</select>
+
+
+<label for="status">Status: </label>
+<select name="status" id="status">
+  <option value="">Todos</option>
+  <option value="ENTREGUE AO PROFISSIONAL">ENTREGUE AO PROFISSIONAL</option>
+  <option value="DEVOLVIDO">DEVOLVIDO</option>
+</select>
+
+
+<input type="submit" value="Buscar">
+</form>
+<br>
+<form method="GET" action="">
+  <input type="text" name="detalhe" placeholder="Pesquisa Geral" value="{{request.GET.detalhe}}">
+<input type="submit" value="Pesquisar">
+
+<hr>
+
+<br>
+{% render_table table %}
+
+{% endblock content %}
