@@ -12,7 +12,7 @@ import socket
 
 # from django_tables2 import RequestConfig
 # Create your views here.
-
+@login_required(login_url='/login/')
 def post_create(request):
 
 	form = PostForm(request.POST or None, request.FILES or None)
@@ -29,7 +29,7 @@ def post_create(request):
 	}
 	return render(request,"post_form.html", context)
 
-
+@login_required(login_url='/login/')
 def post_list(request):
 
 	queryset = Compras.objects.all().order_by('-status')
@@ -56,6 +56,7 @@ def post_list(request):
 
 	return render(request,"post_list.html", context)
 
+@login_required(login_url='/login/')
 def post_detail(request, id=None):
 
 	instance = get_object_or_404(Compras,id=id)
@@ -93,6 +94,7 @@ def post_detail(request, id=None):
 
 	return render(request,"post_detail.html", context)
 
+@login_required(login_url='/login/')
 def post_update(request, id=None):
 	instance = get_object_or_404(Compras,id=id)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
@@ -107,12 +109,14 @@ def post_update(request, id=None):
 	}
 	return render(request,"post_form.html", context)
 #
+@login_required(login_url='/login/')
 def post_delete(request, id=None):
 	instance = get_object_or_404(Compras, id=id)
 	instance.delete()
 	messages.success(request,"Item Deleted :(")
 	return redirect("compras:list")
 
+@login_required(login_url='/login/')
 def comment_delete(request, id=None):
 	instance = get_object_or_404(ComentarioCompras, id=id)
 	instance.delete()
