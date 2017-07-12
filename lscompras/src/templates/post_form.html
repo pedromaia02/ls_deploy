@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<hr>
+<h1>Ordens de Compra - LS Projetos</h1>
+<hr>
+
+<ul class="pagination pagination-lm">
+<li><a href='{% url "compras:list" %}'>Início</a></li>
+<li class="active"><a href='{% url "compras:create" %}'>Adicionar dados</a></li>
+<li ><a href="#">Detalhes</a></li>
+</ul>
+
+<hr>
+<br>
+<h4 style="color:rgb(255,0,0)"><b>Preencha os dados:</b></h4>
+
+<hr>
+<form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+{{ form.as_p }}
+<input type='submit' value='Registrar' />
+</form>
+
+
+
+<p>*Deixar em branco caso não se tenha os dados</p>
+<hr>
+
+{% endblock content %}

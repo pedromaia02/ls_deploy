@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<hr>
+<h1>Ordens de Compra - LS Projetos</h1>
+<hr>
+
+<ul class="pagination pagination-lm">
+<li><a href='{% url "comprastrt:list" %}'>Início</a></li>
+<li><a href='{% url "comprastrt:create" %}'>Adicionar dados</a></li>
+<li class="active"><a href="#">Detalhes</a></li>
+</ul>
+
+<h1> Detalhes da Solicitação: </h1>
+<hr>
+<h4><b>Data:</b> {{ instance.data }} </h4>
+<h4><b>Contrato:</b> {{ instance.origem }} </h4>
+<h4><b>Status:</b> {{ instance.status }} </h4>
+<h4><b>Detalhes:</b> {{ instance.detalhes }} </h4>
+<h4><b>Valor Total:</b> {{ instance.valor }} </h4>
+<h4><b>Última Alteração:</b> {{ instance.registro }} </h4>
+{% if instance.anexo %}
+<a href="{{ instance.anexo.url }}" target="_blank">Download do arquivo em anexo</a>
+{% else %}
+<h4>Item sem anexo</h4>
+{% endif %}
+<hr>
+
+<h2> Comentários: </h2>
+{% for texto,id,user,registro,anexo in zipped %}
+
+{% if anexo %}
+{% if user == "Escritório" %}
+<h6>Em {{registro}}</h6><h4><b style="color:red;">{{user}} comentou:</b> {{ texto }}</h4><h5><a href="/media/{{ anexo }}" target="_blank">Download do arquivo em anexo</h4><a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+{% else %}
+<h6>Em {{registro}}</h6><h4><b style="color:blue;">{{user}} comentou:</b> {{ texto }}</h4><h5><a href="/media/{{ anexo }}" target="_blank">Download do arquivo em anexo</h4><a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+{% endif %}
+{% else %}
+{% if user == "Escritório" %}
+<h6>Em {{registro}}</h6><h4><b style="color:red;">{{user}} comentou:</b> {{ texto }}</h4><a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+{% else %}
+<h6>Em {{registro}}</h6><h4><b style="color:blue;">{{user}} comentou:</b> {{ texto }}</h4><a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+{% endif %}
+{% endif %}
+<hr>
+{% endfor %}
+
+<hr>
+<form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+{{ form.as_p }}
+<input type='submit' value='Comentar' />
+</form>
+
+<hr>
+
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+Vinicius,
+
+Eu coloquei no github o deploy do nosso projeto. Está basicamente com o set up básico pra começar.
+
+Vou comentar algumas instruções básicas.
+
+-----------------------------------------------------------------------
+Para o github, os dados da conta são:
+
+id: mercadointeligente
+pwd: mercadoint02
+-----------------------------------------------------------------------
+
+Não sei se vc já sabe usar múltiplas contas do git no mesmo PC. Eu não sabia. Aprendi por aqui e deu certo:
+
+https://code.tutsplus.com/tutorials/quick-tip-how-to-work-with-github-and-multiple-accounts--net-22574
+
+No link tem tanto vídeo como tutorial escrito também. Olha pelo vídeo e os comandos pega no artigo escrito se preferir.
+-----------------------------------------------------------------------
+
+Com o git setado, vc vai instalar (antes dá um apt-get update:
+ 
+-pip: apt-get -y install python-pip
+
+-virtualenv: sudo pip install virtualenv
+
+-virtualwnvwrapper: sudo pip install virtualenvwrapper
+
+-----------------------------------------------------------------------
+
+O virtualenvwrapper será o nosso docker, o tutorial dele está aqui:
+http://virtualenvwrapper.readthedocs.io/en/latest/install.html
+
+Vc precisa dar só uns comandos antes:
+
+export WORKON_HOME=$HOME/.virtualenvs 
+export PROJECT_HOME=$HOME/Devel 
+source /usr/local/bin/virtualenvwrapper.sh
+
+E criar um container: mkvirtualenv mercadointeligente 
+
+mercadointeligente é o nome do container, deixa esse mesmo pra ficar igual.
+
+Para ativar, basta jogar: workon mercadointeligente
+Para desativar, basta jogar: deactivate
+
+Só a título de informação, se vc testar o comando pip freeze antes e depois de ativado o container, você vê menos programas instalados, fica um negócio mais limpo e a gente vai instalando tudo dentro do container.
+
+-----------------------------------------------------------------------
+
+Depois de ativado o container, você instala o seguinte:
+
+sudo pip install django
+sudo pip install numpy
+
+------------------------------------------------------------------------
+
+Depois tem que instalar um detalhe para utilizar o mysql com o django. Normalmente esse comando já faz isso:
+
+sudo pip install mysqlclient
+
+Se der algum erro, como tinha dado na minha VM. Você instala o seguinte:
+
+sudo apt-get install libmysqlclient-dev 
+
+Testei numa VM limpa e deu certo. Você que já deve ter tudo do mysql instalado, deve dá também sem precisar dessa correção.
+
+------------------------------------------------------------------------
+
+Aí lá no mysql cria uma database de nome mercadointeligente.
+
