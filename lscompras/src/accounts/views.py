@@ -15,7 +15,7 @@ def login_view(request):
 		password = form.cleaned_data.get("password")
 		user = authenticate(username=username, password=password)
 		login(request, user)
-		return redirect('/lscompras/')
+		return redirect(request.GET.get('next'))
 	return render(request,"form.html",{"form": form, "title": title,})
 
 def register_view(request):
