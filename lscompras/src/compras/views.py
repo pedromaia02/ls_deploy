@@ -15,6 +15,9 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/login/')
 def post_create(request):
 
+	if request.user.username != "escritorio":
+		return redirect('/login/?next=%s' % request.path)
+
 	form = PostForm(request.POST or None, request.FILES or None)
 
 	if form.is_valid():
@@ -31,6 +34,9 @@ def post_create(request):
 
 @login_required(login_url='/login/')
 def post_list(request):
+
+	if request.user.username != "escritorio":
+		return redirect('/login/?next=%s' % request.path)
 
 	queryset = Compras.objects.all().order_by('-status')
 	query = request.GET
@@ -58,6 +64,9 @@ def post_list(request):
 
 @login_required(login_url='/login/')
 def post_detail(request, id=None):
+
+	if request.user.username != "escritorio":
+		return redirect('/login/?next=%s' % request.path)
 
 	instance = get_object_or_404(Compras,id=id)
 	form = CommentForm(request.POST or None, request.FILES or None)
@@ -96,6 +105,10 @@ def post_detail(request, id=None):
 
 @login_required(login_url='/login/')
 def post_update(request, id=None):
+
+	if request.user.username != "escritorio":
+		return redirect('/login/?next=%s' % request.path)
+
 	instance = get_object_or_404(Compras,id=id)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 	if form.is_valid():
@@ -111,6 +124,10 @@ def post_update(request, id=None):
 #
 @login_required(login_url='/login/')
 def post_delete(request, id=None):
+
+	if request.user.username != "escritorio":
+		return redirect('/login/?next=%s' % request.path)
+
 	instance = get_object_or_404(Compras, id=id)
 	instance.delete()
 	messages.success(request,"Item Deleted :(")
@@ -118,6 +135,10 @@ def post_delete(request, id=None):
 
 @login_required(login_url='/login/')
 def comment_delete(request, id=None):
+
+	if request.user.username != "escritorio":
+		return redirect('/login/?next=%s' % request.path)
+		
 	instance = get_object_or_404(ComentarioCompras, id=id)
 	instance.delete()
 	messages.success(request,"Mensagem Excluída :(")
