@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 # from django_tables2 import RequestConfig
 # Create your views here.
-@login_required(login_url='/login/')
+@login_required(login_uzrl='/login/')
 def post_create(request):
 
 	if request.user.username != "escritorio":
@@ -138,7 +138,7 @@ def comment_delete(request, id=None):
 
 	if request.user.username != "escritorio":
 		return redirect('/login/?next=%s' % request.path)
-		
+
 	instance = get_object_or_404(ComentarioCompras, id=id)
 	instance.delete()
 	messages.success(request,"Mensagem Excluída :(")

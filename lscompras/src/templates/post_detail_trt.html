@@ -31,16 +31,21 @@
 {% for texto,id,user,registro,anexo in zipped %}
 
 {% if anexo %}
-{% if user == "Escritório" %}
-<h6>Em {{registro}}</h6><h4><b style="color:red;">{{user}} comentou:</b> {{ texto }}</h4><h5><a href="/media/{{ anexo }}" target="_blank">Download do arquivo em anexo</h4><a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+{% if user == "TRT" %}
+<h6>Em {{registro}}</h6><h4><b style="color:blue;">{{user}} comentou:</b> {{ texto }}</h4><h5><a href="/media/{{ anexo }}" target="_blank">Download do arquivo em anexo</h4>
+<a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
 {% else %}
-<h6>Em {{registro}}</h6><h4><b style="color:blue;">{{user}} comentou:</b> {{ texto }}</h4><h5><a href="/media/{{ anexo }}" target="_blank">Download do arquivo em anexo</h4><a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+<h6>Em {{registro}}</h6><h4><b style="color:red;">{{user}} comentou:</b> {{ texto }}</h4><h5>
+<a href="/media/{{ anexo }}" target="_blank">Download do arquivo em anexo</h4>
+<!-- <a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>   -->
 {% endif %}
 {% else %}
-{% if user == "Escritório" %}
-<h6>Em {{registro}}</h6><h4><b style="color:red;">{{user}} comentou:</b> {{ texto }}</h4><a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+{% if user == "TRT" %}
+<h6>Em {{registro}}</h6><h4><b style="color:blue;">{{user}} comentou:</b> {{ texto }}</h4>
+<a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
 {% else %}
-<h6>Em {{registro}}</h6><h4><b style="color:blue;">{{user}} comentou:</b> {{ texto }}</h4><a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+<h6>Em {{registro}}</h6><h4><b style="color:red;">{{user}} comentou:</b> {{ texto }}</h4>
+<!-- <a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a> -->
 {% endif %}
 {% endif %}
 <hr>
