@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Q
 import socket
-
+from django.contrib.auth.decorators import login_required
 
 # from django_tables2 import RequestConfig
 # Create your views here.
