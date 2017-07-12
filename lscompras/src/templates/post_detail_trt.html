@@ -33,7 +33,7 @@
 {% if anexo %}
 {% if user == "TRT" %}
 <h6>Em {{registro}}</h6><h4><b style="color:blue;">{{user}} comentou:</b> {{ texto }}</h4><h5><a href="/media/{{ anexo }}" target="_blank">Download do arquivo em anexo</h4>
-<a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+<a href="{% url 'comprastrt:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
 {% else %}
 <h6>Em {{registro}}</h6><h4><b style="color:red;">{{user}} comentou:</b> {{ texto }}</h4><h5>
 <a href="/media/{{ anexo }}" target="_blank">Download do arquivo em anexo</h4>
@@ -42,7 +42,7 @@
 {% else %}
 {% if user == "TRT" %}
 <h6>Em {{registro}}</h6><h4><b style="color:blue;">{{user}} comentou:</b> {{ texto }}</h4>
-<a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
+<a href="{% url 'compras:commenttrt_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a>
 {% else %}
 <h6>Em {{registro}}</h6><h4><b style="color:red;">{{user}} comentou:</b> {{ texto }}</h4>
 <!-- <a href="{% url 'compras:comment_delete' id=id %}" onclick="return confirm('Confirma excluir o comentário?')"> Excluir</a> -->
