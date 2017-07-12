@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 # from django_tables2 import RequestConfig
 # Create your views here.
-@login_required(login_uzrl='/login/')
+@login_required(login_url='/login/')
 def post_create(request):
 
 	if request.user.username != "escritorio":
