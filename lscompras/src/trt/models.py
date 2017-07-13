@@ -29,6 +29,7 @@ class Compras(models.Model):
     status = models.CharField(max_length=45, blank=True, null=True)
     detalhes = models.CharField(max_length=1000)
     anexo = models.FileField(null=True,blank=True,upload_to='documents/%Y/%m/%d')
+    prazo = models.DateField(blank=True, null=True)
     valor = models.FloatField(blank=True, null=True)
     registro = models.DateTimeField(auto_now=True, blank=True, null=True)
 

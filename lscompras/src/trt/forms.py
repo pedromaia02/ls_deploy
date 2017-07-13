@@ -16,6 +16,7 @@ class PostForm(forms.ModelForm):
 			"data",
 			"detalhes",
 			"status",
+			"prazo",
 			"valor",
 			"anexo",
 		]
@@ -29,6 +30,7 @@ class PostForm(forms.ModelForm):
 	status = forms.CharField(widget=forms.Select(choices=STATUS))
 	#data = forms.DateField(widget=forms.SelectDateWidget(),initial=datetime.date.today())
 	data = forms.DateField(widget=forms.SelectDateWidget(years=range(2015, 2020)),initial=datetime.date.today())
+	prazo = forms.DateField(widget=forms.SelectDateWidget(years=range(2015, 2020)),initial=datetime.date.today())
 
 	CONTRATOS = [
 		('TRT', 'TRT'),
@@ -45,6 +47,7 @@ class PostForm(forms.ModelForm):
 		self.fields['status'].label = 'Status:'
 		self.fields['detalhes'].label = ''
 		self.fields['data'].label = 'Data:'
+		self.fields['prazo'].label = 'Prazo até dia:'
 
 class CommentForm(forms.ModelForm):
 	class Meta:

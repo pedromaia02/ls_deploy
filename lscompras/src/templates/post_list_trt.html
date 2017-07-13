@@ -64,6 +64,7 @@
       <th>Data</th>
       <th>Contrato</th>
       <th>Status</th>
+      <th>Prazo</th>
       <th>Detalhes</th>
       <th>Anexo</th>
     </tr>
@@ -75,6 +76,7 @@
       <td>{{dados.data}}</td>
       <td>{{dados.origem}}</td>
       <td>{{dados.status}}</td>
+      <td>{{dados.prazo}}</td>
       <td>{{dados.detalhes}}</td>
       {% if dados.anexo != "" %}
       <td><a href="{{ dados.anexo.url }}" target="_blank">Download</td>
