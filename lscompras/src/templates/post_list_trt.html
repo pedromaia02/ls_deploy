@@ -4,7 +4,7 @@
 
 
 <hr>
-<h1>Ordens de Compra - LS Projetos</h1>
+<h1>Ordens de Compra - LS Projetos - TRT</h1>
 <hr>
 
 <ul class="pagination pagination-lm">
@@ -62,7 +62,6 @@
       <th>Ações</th>
       <!-- <th>id</th> -->
       <th>Data</th>
-      <th>Contrato</th>
       <th>Status</th>
       <th>Prazo</th>
       <th>Detalhes</th>
@@ -74,7 +73,6 @@
       <td><a href="{% url 'comprastrt:detail' id=dados.id %}">Detalhes</a> | <a href="{% url 'comprastrt:update' id=dados.id %}">Editar</a> | <a href="{% url 'comprastrt:delete' id=dados.id %}" onclick="return confirm('Confirma excluir o item selecionado?')">Deletar</a></td>
       <!-- <td>{{dados.id}}</td> -->
       <td>{{dados.data}}</td>
-      <td>{{dados.origem}}</td>
       <td>{{dados.status}}</td>
       <td>{{dados.prazo}}</td>
       <td>{{dados.detalhes}}</td>
