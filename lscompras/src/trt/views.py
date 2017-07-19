@@ -29,7 +29,8 @@ def post_create(request):
 	context = {
 		"form":form,
 	}
-	os.system('echo -e "to: pedromaia02@gmail.com\nsubject: Nova ordem de compra\n" | ssmtp pedromaia02@gmail.com')
+	# os.system('echo -e "to: alexandra@lsprojetos.com.br\nsubject: Nova ordem de compra solicitada\n" | ssmtp pedro@lsprojetos.com.br')
+	# os.system('echo -e "to: escritorio2@lsprojetos.com.br\nsubject: Nova ordem de compra solicitada\n" | ssmtp pedromaia02@gmail.com')
 	return render(request,"post_form_trt.html", context)
 
 @login_required(login_url='/login/')
