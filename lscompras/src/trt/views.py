@@ -9,6 +9,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Q
 import socket
 from django.contrib.auth.decorators import login_required
+import os
 
 # from django_tables2 import RequestConfig
 # Create your views here.
@@ -28,6 +29,7 @@ def post_create(request):
 	context = {
 		"form":form,
 	}
+	os.system('echo -e "to: pedromaia02@gmail.com\nsubject: Nova ordem de compra\n" | ssmtp pedromaia02@gmail.com')
 	return render(request,"post_form_trt.html", context)
 
 @login_required(login_url='/login/')
