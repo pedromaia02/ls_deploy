@@ -24,8 +24,8 @@ def post_create(request):
 		instance.save()
 
 		messages.success(request,"Successfully Created!!")
-		os.system('echo -e "to: alexandra@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\n" | ssmtp ls.projetos02@gmail.com')
-		os.system('echo -e "to: escritorio2@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\n" | ssmtp ls.projetos02@gmail.com')
+		# os.system("echo -e 'to: alexandra@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\n' | ssmtp ls.projetos02@gmail.com")
+		# os.system("echo -e 'to: escritorio2@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\n' | ssmtp ls.projetos02@gmail.com")
 		return redirect("comprastrt:list")
 
 	context = {
