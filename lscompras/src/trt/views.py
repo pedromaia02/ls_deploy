@@ -9,12 +9,12 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Q
 import socket
 from django.contrib.auth.decorators import login_required
-import os
-
+# import os
+import smtplib
 # from django_tables2 import RequestConfig
 # Create your views here.
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_create(request):
 
 	form = PostForm(request.POST or None, request.FILES or None)
@@ -24,8 +24,7 @@ def post_create(request):
 		instance.save()
 
 		messages.success(request,"Successfully Created!!")
-		# os.system("echo -e 'to: alexandra@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\n' | ssmtp ls.projetos02@gmail.com")
-		# os.system("echo -e 'to: escritorio2@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\n' | ssmtp ls.projetos02@gmail.com")
+		sendmail()
 		return redirect("comprastrt:list")
 
 	context = {
@@ -33,7 +32,7 @@ def post_create(request):
 	}
 	return render(request,"post_form_trt.html", context)
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_list(request):
 
 	queryset = Compras.objects.all().filter(origem='TRT').order_by('-registro')
@@ -60,7 +59,7 @@ def post_list(request):
 
 	return render(request,"post_list_trt.html", context)
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_detail(request, id=None):
 
 	instance = get_object_or_404(Compras,id=id)
@@ -98,7 +97,7 @@ def post_detail(request, id=None):
 
 	return render(request,"post_detail_trt.html", context)
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_update(request, id=None):
 	instance = get_object_or_404(Compras,id=id)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
@@ -113,16 +112,41 @@ def post_update(request, id=None):
 	}
 	return render(request,"post_form_trt.html", context)
 #
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def post_delete(request, id=None):
 	instance = get_object_or_404(Compras, id=id)
 	instance.delete()
 	messages.success(request,"Item Deleted :(")
 	return redirect("comprastrt:list")
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def comment_delete(request, id=None):
 	instance = get_object_or_404(ComentarioCompras, id=id)
 	instance.delete()
 	messages.success(request,"Mensagem Excluída :(")
 	return redirect(request.META['HTTP_REFERER'])
+
+def sendmail():
+	sender = 'ls.projetos02@gmail.com'
+	receivers = ['alexandra@lsprojetos.com.br', 'escritorio2@lsprojetos.com.br']
+
+	message = "\r\n".join([
+	  "From: ls.projetos02@gmail.com",
+	  "To: ls.projetos02@gmail.com",
+	  "Subject: teste",
+	  "",
+	  "Uma nova solicitação de compra foi cadastrada no sistema. Por favor, acessar."
+	  ])
+	username = 'ls.projetos02@gmail.com'
+	password = 'lsprojetos02'
+
+	try:
+		smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+		smtpObj.ehlo()
+		smtpObj.starttls()
+		smtpObj.login(username,password)
+		smtpObj.sendmail(sender, receivers, message)
+		smtpObj.quit()
+		print "Ok!"
+	except:
+		print "Erro!"
