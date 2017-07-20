@@ -29,10 +29,8 @@ def post_create(request):
 	context = {
 		"form":form,
 	}
-	os.system('echo -e "to: alexandra@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\nVocê possui uma nova solicitação de compra no sistema. Acesse para visualizar." | ssmtp ls.projetos02@gmail.com
-')
-	os.system('echo -e "to: escritorio2@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\nVocê possui uma nova solicitação de compra no sistema. Acesse para visualizar." | ssmtp ls.projetos02@gmail.com
-')
+	os.system('echo -e "to: alexandra@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\nVocê possui uma nova solicitação de compra no sistema. Acesse para visualizar." | ssmtp ls.projetos02@gmail.com')
+	os.system('echo -e "to: escritorio2@lsprojetos.com.br\nsubject: Nova solicitação de compra cadastrada\nVocê possui uma nova solicitação de compra no sistema. Acesse para visualizar." | ssmtp ls.projetos02@gmail.com')
 	return render(request,"post_form_trt.html", context)
 
 @login_required(login_url='/login/')
