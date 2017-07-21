@@ -133,7 +133,7 @@ def sendmail():
 
 	message = "\r\n".join([
 	  "From: ls.projetos02@gmail.com",
-	  "To: ls.projetos02@gmail.com",
+	  "To: escritorio2@lsprojetos.com.br",
 	  "Subject: Nova solicitação de compra cadastrada",
 	  "",
 	  "Uma nova solicitação de compra foi cadastrada no sistema. Por favor, acessar."
@@ -158,7 +158,7 @@ def sendmailComment():
 
 	message = "\r\n".join([
 	  "From: ls.projetos02@gmail.com",
-	  "To: ls.projetos02@gmail.com",
+	  "To: escritorio2@lsprojetos.com.br",
 	  "Subject: Novo comentário sobre uma ordem compra",
 	  "",
 	  "Um novo comentário sobre uma ordem de compra foi cadastrado no sistema. Por favor, acessar."
