@@ -71,6 +71,7 @@ def post_detail(request, id=None):
 		# print instance.anexo
 		# id_comentario=instance.__dict__['id']
 		ComentarioCompras(id_compra=id,id_comentario=instance.id,user="TRT",anexo=instance.anexo,).save()
+		sendmailComment()
 		return redirect(request.META['HTTP_REFERER'])
 
 	comentarios_compra = ComentarioCompras.objects.filter(id_compra=id)
@@ -133,9 +134,34 @@ def sendmail():
 	message = "\r\n".join([
 	  "From: ls.projetos02@gmail.com",
 	  "To: ls.projetos02@gmail.com",
-	  "Subject: teste",
+	  "Subject: Nova solicitação de compra cadastrada",
 	  "",
 	  "Uma nova solicitação de compra foi cadastrada no sistema. Por favor, acessar."
+	  ])
+	username = 'ls.projetos02@gmail.com'
+	password = 'lsprojetos02'
+
+	try:
+		smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+		smtpObj.ehlo()
+		smtpObj.starttls()
+		smtpObj.login(username,password)
+		smtpObj.sendmail(sender, receivers, message)
+		smtpObj.quit()
+		print "Ok!"
+	except:
+		print "Erro!"
+
+def sendmailComment():
+	sender = 'ls.projetos02@gmail.com'
+	receivers = ['alexandra@lsprojetos.com.br', 'escritorio2@lsprojetos.com.br']
+
+	message = "\r\n".join([
+	  "From: ls.projetos02@gmail.com",
+	  "To: ls.projetos02@gmail.com",
+	  "Subject: Novo comentário sobre uma ordem compra",
+	  "",
+	  "Um novo comentário sobre uma ordem de compra foi cadastrado no sistema. Por favor, acessar."
 	  ])
 	username = 'ls.projetos02@gmail.com'
 	password = 'lsprojetos02'
