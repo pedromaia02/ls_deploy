@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'ls',
         'USER': 'pedro',
         'PASSWORD': 'xofvwhto',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'HOST': 'jml5a74,cc',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
