@@ -14,7 +14,7 @@ from .models import NatalPosts,NatalProfissionals,NatalCidades
 from .forms import PostForm
 from .tables import PostsTable
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_create(request):
 
 	form = PostForm(request.POST or None, request.FILES or None)
@@ -31,7 +31,7 @@ def post_create(request):
 	}
 	return render(request,"post_natal_form.html", context)
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_detail(request, id=None):
 	instance = get_object_or_404( NatalPosts,id=id)
 
@@ -52,7 +52,7 @@ def post_detail(request, id=None):
 	}
 	return render(request,"post_natal_detail.html", context)
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_list(request):
 
 	queryset = NatalPosts.objects.all().order_by('-data')
@@ -84,7 +84,7 @@ def post_list(request):
 	 	}
 	return render(request,"post_natal_list.html", context)
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_update(request, id=None):
 	instance = get_object_or_404(NatalPosts,id=id)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
@@ -99,7 +99,7 @@ def post_update(request, id=None):
 	}
 	return render(request,"post_natal_form.html", context)
 #
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def post_delete(request, id=None):
 	instance = get_object_or_404(NatalPosts, id=id)
 	instance.delete()
