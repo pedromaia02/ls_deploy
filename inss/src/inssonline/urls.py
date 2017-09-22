@@ -1,3 +1,5 @@
+# 2017.09.22 10:08:01 BRT
+#Embedded file name: /home/pedro/ls_deploy/ls_deploy/inss/src/inssonline/urls.py
 """inssonline URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -14,24 +16,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import include,url
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-
 from fortalposts import views
 from natalposts import views
 from imperatrizposts import views
-from accounts.views import (login_view, register_view, logout_view)
+from accounts.views import login_view, register_view, logout_view
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^inssfortaleza/', include("fortalposts.urls", namespace='fortalposts')),
-    url(r'^inssnatal/', include("natalposts.urls", namespace='natalposts')),
-    url(r'^inssimperatriz/', include("imperatrizposts.urls", namespace='imperatrizposts')),
-    url(r'^login/', login_view, name='login'),
-    url(r'^logout/', logout_view, name='logout'),
-]
-
+urlpatterns = [url('^admin/', admin.site.urls),
+ url('^inssfortaleza/', include('fortalposts.urls', namespace='fortalposts')),
+ url('^inssnatal/', include('natalposts.urls', namespace='natalposts')),
+ url('^inssimperatriz/', include('imperatrizposts.urls', namespace='imperatrizposts')),
+ url('^inssmossoro/', include('mossoroposts.urls', namespace='mossoroposts')),
+ url('^login/', login_view, name='login'),
+ url('^logout/', logout_view, name='logout')]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

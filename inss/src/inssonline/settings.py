@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'fortalposts',
     'natalposts',
     'imperatrizposts',
+    'mossoroposts',
     'accounts',
 ]
 
