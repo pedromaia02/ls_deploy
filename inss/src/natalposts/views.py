@@ -14,6 +14,10 @@ from .models import NatalPosts,NatalProfissionals,NatalCidades
 from .forms import PostForm
 from .tables import PostsTable
 
+from django.http import HttpResponse
+from django.views.generic import View
+from inssonline.utils import render_to_pdf #created in step 4
+
 #@login_required(login_url='/login/')
 def post_create(request):
 
@@ -66,7 +70,7 @@ def post_list(request):
 		queryset = queryset.filter(local__icontains=request.GET.get('local',''))
 		queryset = queryset.filter(status__icontains=request.GET.get('status',''))
 		queryset = queryset.filter(detalhe__icontains=request.GET.get('detalhe',''))
-		print queryset.values_list()
+		#print queryset.values_list()
 		if request.GET.get('tipo','')=='0' or request.GET.get('tipo','')== "":
 			pass
 		elif request.GET.get('tipo','')=='2':
@@ -105,3 +109,41 @@ def post_delete(request, id=None):
 	instance.delete()
 	messages.success(request,"Item Deleted :(")
 	return redirect("natalposts:list")
+
+
+def setup_pdf(request):
+
+	queryset = NatalPosts.objects.all().order_by('data')
+	query = request.GET
+	dados = []
+	if query:
+		mes = request.GET.get('mes','')
+		ano = request.GET.get('ano','')
+		queryset = queryset.filter(data__year=ano)
+		queryset = queryset.filter(data__month=mes)
+
+		for x in queryset.values_list():
+			dados.append(list(x))
+
+		for i in range(0,len(dados)):
+			nomes = []
+			str_list = ""
+			nomes = dados[i][6].split(",")
+			for nome in nomes:
+				str_list += nome.partition("'")[2].partition("'")[0]
+				str_list += " ; "
+			dados[i][6] = str_list
+
+		context = {
+		'dados': dados,
+		'ano': ano,
+		'mes': mes,
+		}
+		pdf = render_to_pdf('pdf/invoice.html', context)
+		return HttpResponse(pdf, content_type='application/pdf')
+
+	context = {
+	'object_list': queryset,
+	'dados': dados,
+	}
+	return render(request,"pdf/setup_pdf.html", context)
