@@ -138,7 +138,7 @@ def setup_pdf(request):
 		'dados': dados,
 		'ano': ano,
 		'mes': mes,
-		}
+		} 
 		pdf = render_to_pdf('pdf/invoice.html', context)
 		return HttpResponse(pdf, content_type='application/pdf')
 

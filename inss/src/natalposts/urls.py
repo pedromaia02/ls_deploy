@@ -17,3 +17,4 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/delete/$', post_delete, name='delete'),
 	url(r'^setuppdf/$', setup_pdf, name='setuppdf'),
 ]
+ 
